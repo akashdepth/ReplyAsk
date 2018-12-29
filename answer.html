@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Find the answer of your questions</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/navbar.css">
+  <link rel="stylesheet" href="css/box.css">
+  <script src="scripts/jquery.min.js"></script>
+  <script src="scripts/bootstrap.min.js"></script>
+  <script src="scripts/box.js"></script>
+<style>
+.inputbox{
+  background-color: white;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 15px;
+}
+
+textarea
+{
+  width:100%;
+}
+
+body {margin:0;}
+
+.main {
+  padding: 10px;
+  margin-top: 40px;
+  background-color: #ddd;
+}
+
+</style>
+
+<script type="text/javascript">
+  
+  function Question(question, userProfile, userName, time, id){
+    return buildBox(question, userProfile, userName, time, "", false, id, false);
+  }
+
+  function Answer(answer, userProfile, userName, time, id){
+    return buildBox("", userProfile, userName, time, answer, false, id, false);
+  }
+
+  function HighLightGridBox(question, answer,userProfile, userName, time, id){
+    return buildBox(question, userProfile, userName, time, answer, true, id, true);
+  }
+
+var data = [
+{
+  "id" : 2,
+  "userName" : "Akash Chaudhary",
+  "question": "How to save the world",
+  "userProfile" : "http://images.asianage.com/images/aa-Cover-5tujqdum4b4isn8u7vdcnd54t1-20180113235252.Medi.jpeg",
+  "time": "2 hours ago", 
+  "answers": [
+        {
+        "id" : 2,
+        "userName" : "Akash Chaudhary",
+        "answer" : "We can't save the world at any cost",
+        "userProfile" : "http://images.asianage.com/images/aa-Cover-5tujqdum4b4isn8u7vdcnd54t1-20180113235252.Medi.jpeg",
+        "time": "2 hours ago", 
+        },
+        {
+        "id" : 2,
+        "userName" : "Akash Chaudhary",
+        "answer" : "We can't save the world at any cost",
+        "userProfile" : "http://images.asianage.com/images/aa-Cover-5tujqdum4b4isn8u7vdcnd54t1-20180113235252.Medi.jpeg",
+        "time": "2 hours ago", 
+        },]
+  }
+];
+
+</script>
+
+
+</head>
+<body>
+
+<div class="navbar">
+    <a href="#home" >Home</a>
+    <a href="#home" style="float: right;">Ask</a>
+</div>
+
+<div id="main-wrapper">
+<div class="main" id="main">
+<script type="text/javascript">
+ $.each(data, function( index, value ) {
+  $("#main").append(Question(value["question"],  value["userProfile"], value["userName"], value["time"], value["id"]));
+  
+  
+  $.each(value["answers"], function(ind, val){
+    console.log(ind);
+    $("#main").append(Answer(val["answer"], val["userProfile"], val["userName"], val["time"], val["id"]));
+  })
+});
+</script>
+<div class="inputbox">
+  <label for="rules" id="ruleslabel">Your Answer</label>
+  <div>
+  <button type="button" class="btn btn btn-danger" style="float: right; margin-bottom: 10px; margin-right: 10px: ">Post</button>
+  <textarea  name="youranswer"  rows="7"></textarea>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>
+
