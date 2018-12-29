@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Column;
 
 @Entity
 public class Answer {
@@ -15,6 +16,8 @@ public class Answer {
     private Long userId;
     private String language;
     private long timestamp;
+
+    @Column(columnDefinition = "LONGTEXT")
     private String answer;
     private Long questionId;
 

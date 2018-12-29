@@ -1,5 +1,6 @@
 package com.bs.social.models;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,6 +16,8 @@ public class Question {
     private Long userId;
     private String language;
     private long timestamp;
+
+    @Column(columnDefinition = "LONGTEXT")
     private String question;
 
     public Question() {
