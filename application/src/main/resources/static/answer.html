@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Find the answer of your questions</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/navbar.css">
+  <link rel="stylesheet" href="css/box.css">
+  <script src="scripts/jquery.min.js"></script>
+  <script src="scripts/bootstrap.min.js"></script>
+  <script src="scripts/box.js"></script>
+<style>
+.inputbox{
+  background-color: white;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 15px;
+}
+
+textarea
+{
+  width:100%;
+}
+
+body {margin:0;}
+
+.main {
+  padding: 10px;
+  margin-top: 40px;
+  background-color: #ddd;
+}
+
+</style>
+
+<script type="text/javascript">
+  
+  function Question(question, userProfile, userName, timestamp, id){
+    return buildBox(question, userProfile, userName, timestamp, "", false, id, false);
+  }
+
+  function Answer(answer, userProfile, userName, timestamp, id){
+    return buildBox("", userProfile, userName, timestamp, answer, false, id, false);
+  }
+
+  function HighLightGridBox(question, answer,userProfile, userName, timestamp, id){
+    return buildBox(question, userProfile, userName, timestamp, answer, true, id, true);
+  }
+
+  function getParams() {
+
+    var params = {},
+        pairs = document.URL.split('?')
+               .pop()
+               .split('&');
+
+    for (var i = 0, p; i < pairs.length; i++) {
+           p = pairs[i].split('=');
+           params[ p[0] ] =  p[1];
+    }     
+
+    return params;
+}
+
+var parms = getParams();
+var id = parms['id'];
+function refreshPage(){
+  $.get( "/api/get_question/"+id,
+          {},
+          function(content) {
+            var data = [content['data']];
+            console.log(data);
+             $.each(data, function( index, value ) {
+                       $.each(data, function( index, value ) {
+                        $("#main").append(Question(value["question"],  value["userProfile"], value["userName"], value["timestamp"], value["id"]));
+                        $.each(value["answers"], function(ind, val){
+                          $("#main").append(Answer(val["answer"], val["userProfile"], val["userName"], val["timestamp"], val["id"]));
+                        })
+                      });
+                  });
+          }
+        );
+}
+
+refreshPage();
+
+function postAnswer(){
+  
+  var ans = document.getElementById("ans").value;
+  
+  var inner_data = {"questionId": parseInt(id), "answer": ans};
+  var settings = {
+  "async": true,
+  "crossDomain": true,
+  "url": "/api/add_answer",
+  "method": "POST",
+  "headers": {
+    "content-type": "application/json",
+    "cache-control": "no-cache",
+  },
+  "processData": false,
+  "data": JSON.stringify(inner_data)
+}
+
+$.ajax(settings).done(function (response) {
+  location.reload()
+});
+}
+
+</script>
+
+
+</head>
+<body>
+
+<div class="navbar">
+    <a href="/index.html" >Home</a>
+    <a href="/question.html" style="float: right;">Ask</a>
+</div>
+
+<div id="main-wrapper">
+<div class="main" id="main">
+</div>
+<div class="inputbox">
+  <label for="rules" id="ruleslabel">Your Answer</label>
+  <div>
+  <button type="button" class="btn btn btn-danger" style="float: right; margin-bottom: 10px; margin-right: 10px: " onclick="postAnswer()">Post</button>
+  <textarea  name="youranswer"  rows="7" id="ans"></textarea>
+</div>
+</div>
+
+</div>
+</body>
+</html>
+

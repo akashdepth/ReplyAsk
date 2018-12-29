@@ -1,0 +1,31 @@
+
+.box{
+  background-color: white;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 15px;
+}
+
+.bottom-bar{
+ font-size: 10px;
+ font-weight: bold;
+ color: gray;
+ margin-top: 10px;
+}
+
+.time-bar{
+ font-size: 10px;
+ font-weight: bold;
+ color: gray;
+}
+
+.content-section{
+  margin-top: 10px;
+}
+
+.inputbox{
+  background-color: white;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 15px;
+}
