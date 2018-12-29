@@ -1,0 +1,9 @@
+*.idea/
+*build/
+*.jar
+*.class
+classes/
+.git/
+.gradle/
+.gradlew
+*application.properties
