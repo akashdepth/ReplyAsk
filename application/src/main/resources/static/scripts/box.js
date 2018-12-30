@@ -2,7 +2,7 @@ function checkIsRemaining(isRemaining, id){
 
    if(isRemaining){
     return (
-      '<div><a href="/answer.html?id='+id+'" > Read More</a></div>'
+      '<div><a href="/answer.html?id='+id+'" > और पढो</a></div>'
       );
    }
    else return '';
@@ -21,7 +21,7 @@ function checkIsRemaining(isRemaining, id){
 
 function checkCanAnswerTheQuestion(canAnswerQuestion, id){
   if(canAnswerQuestion){
-    return ('<div class="row content-section"><div><a href="/answer.html?id='+id+'" >Answer the question</a></div></div>');
+    return ('<div class="row content-section"><div><a href="/answer.html?id='+id+'" >इस प्रश्न का उत्तर दो</a></div></div>');
   }
   else return '';
 }

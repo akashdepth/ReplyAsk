@@ -135,7 +135,8 @@ public class AppController {
             Answer answer = answerRepository.findFirstByQuestionIdOrderByTimestampDesc(question.getId());
 
             if(answer!=null) {
-                contentMap.put("answer", answer.getAnswer());
+                String ans = answer.getAnswer();
+                contentMap.put("answer", ans.substring(0,Math.min(120, ans.length())));
             }else{
                 contentMap.put("answer", "No Answer for this question yet.");
             }

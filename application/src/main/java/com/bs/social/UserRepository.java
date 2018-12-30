@@ -2,7 +2,6 @@ package com.bs.social;
 
 import com.bs.social.models.User;
 import org.springframework.data.repository.CrudRepository;
-
 import java.util.List;
 
 
